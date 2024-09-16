@@ -1,0 +1,33 @@
+CREATE TABLE Rooms (
+    RoomNumber INT PRIMARY KEY,
+    RoomType VARCHAR(50),
+    Price DOUBLE,
+    Status VARCHAR(20)
+);
+
+CREATE TABLE Guests (
+    GuestID INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Phone VARCHAR(20)
+);
+
+CREATE TABLE Bookings (
+    BookingID INT AUTO_INCREMENT PRIMARY KEY,
+    GuestID INT,
+    RoomID INT,
+    CheckInDate DATE,
+    CheckOutDate DATE,
+    FOREIGN KEY (GuestID) REFERENCES Guests(GuestID),
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomNumber)
+);
+
+CREATE TABLE Payments (
+    PaymentID INT AUTO_INCREMENT PRIMARY KEY,
+    BookingID INT,
+    Amount DOUBLE,
+    PaymentDate DATE,
+    PaymentMethod VARCHAR(50),
+    FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID)
+);
